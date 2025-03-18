@@ -11,7 +11,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Changed to flex-start to avoid centering the whole page vertically */
+            align-items: flex-start;
             min-height: 100vh;
             background-color: #f0f0f0;
         }
@@ -19,15 +19,15 @@
             text-align: center;
             width: 80%;
             max-width: 800px;
-            padding-top: 20px; /* Added padding to ensure title is visible */
+            padding-top: 20px;
         }
         h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
-            color: #000; /* Ensure title is visible */
+            color: #000;
         }
         .artwork {
-            width: 600px; /* 600x600px artwork */
+            width: 600px;
             height: 600px;
             margin: 0 auto 20px auto; /* Centered with bottom margin */
             position: relative;
@@ -35,18 +35,23 @@
         .description-section {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+            width: 600px; /* Match artwork width for consistency */
+            margin-left: auto;
+            margin-right: auto;
         }
         .description {
-            width: 70%;
+            width: 70%; /* Adjusted to match image proportion */
             height: 100px;
             background-color: #ddd;
             padding: 10px;
             text-align: left;
             box-sizing: border-box;
+            margin: 0; /* Remove default margin */
         }
         .buy-button {
-            width: 20%;
+            width: 20%; /* Adjusted to match image proportion */
             height: 100px;
             display: flex;
             justify-content: center;
@@ -59,15 +64,17 @@
             color: white;
             border: none;
             cursor: pointer;
+            width: 100%; /* Ensure button fills the space */
+            height: 100%; /* Ensure button fills the space */
         }
         .buy-button button:hover {
             background-color: #45a049;
         }
         .chart {
-            width: 100%;
+            width: 600px; /* Match artwork width for consistency */
             height: 300px;
             background-color: #ddd;
-            margin-bottom: 20px;
+            margin: 0 auto 20px auto; /* Centered with bottom margin */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -84,9 +91,9 @@
                 let borderSize;
 
                 function setup() {
-                    let canvasSize = 600; // 600x600px canvas
+                    let canvasSize = 600;
                     createCanvas(canvasSize, canvasSize);
-                    borderSize = canvasSize * 0.15; // 15% of 600px
+                    borderSize = canvasSize * 0.15;
                     noStroke();
                     noLoop();
                     generateArt();
@@ -101,19 +108,17 @@
 
                     // Desenha a borda
                     fill(0);
-                    rect(0, 0, width, borderSize); // Borda superior
-                    rect(0, height - borderSize, width, borderSize); // Borda inferior
-                    rect(0, 0, borderSize, height); // Borda esquerda
-                    rect(width - borderSize, 0, borderSize, height); // Borda direita
+                    rect(0, 0, width, borderSize);
+                    rect(0, height - borderSize, width, borderSize);
+                    rect(0, 0, borderSize, height);
+                    rect(width - borderSize, 0, borderSize, height);
 
-                    // Define um número aleatório de figuras entre 30 e 45
                     let numShapes = int(random(30, 45));
 
                     for (let i = 0; i < numShapes; i++) {
                         drawRandomShape();
                     }
 
-                    // Certifica-se de que a granulação seja aplicada após as figuras
                     applyGrain();
                 }
 
