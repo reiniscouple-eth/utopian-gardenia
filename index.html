@@ -8,167 +8,88 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
         }
         .container {
-            text-align: center;
-            width: 600px; /* Fixed width to match artwork and ensure consistency */
-            padding-top: 20px;
+            max-width: 800px;
+            margin: auto;
         }
         h1 {
-            font-size: 2.5em;
             margin-bottom: 20px;
-            color: #000;
         }
         .artwork {
-            width: 600px;
-            height: 600px;
-            margin: 0 auto 20px auto; /* Centered with bottom margin */
-            position: relative;
-            overflow: hidden; /* Prevent canvas overflow */
+            width: 100%;
+            height: 400px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
         }
-        .description-section {
+        .description-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            width: 100%; /* Full width of container (600px) */
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid black;
         }
         .description {
-            width: 70%; /* 70% of 600px = 420px */
-            height: 100px;
-            background-color: #ddd;
-            padding: 10px;
+            flex: 1;
             text-align: left;
-            box-sizing: border-box;
-            margin: 0; /* Remove default margin */
+            padding-right: 10px;
         }
         .buy-button {
-            width: 20%; /* 20% of 600px = 120px */
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .buy-button button {
             padding: 10px 20px;
-            font-size: 1em;
-            background-color: #4CAF50;
+            background-color: #007BFF;
             color: white;
             border: none;
             cursor: pointer;
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
+            font-size: 16px;
         }
-        .buy-button button:hover {
-            background-color: #45a049;
+        .buy-button:hover {
+            background-color: #0056b3;
         }
         .chart {
-            width: 600px;
+            width: 100%;
             height: 300px;
-            background-color: #ddd;
-            margin: 0 auto 20px auto; /* Centered with bottom margin */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border: 1px solid black;
+            margin-top: 20px;
+            background-color: #f8f8f8;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
 </head>
 <body>
+
     <div class="container">
         <h1>Utopian Gardenia</h1>
-        <div class="artwork">
-            <script>
-                let colors = ['#8C162C', '#92A668', '#F28157', '#D93636'];
-                let borderSize;
 
-                function setup() {
-                    let canvasSize = 600;
-                    createCanvas(canvasSize, canvasSize);
-                    borderSize = canvasSize * 0.15;
-                    noStroke();
-                    noLoop();
-                    generateArt();
-                }
-
-                function draw() {
-                    applyGrain();
-                }
-
-                function generateArt() {
-                    background('#401414');
-
-                    // Desenha a borda
-                    fill(0);
-                    rect(0, 0, width, borderSize);
-                    rect(0, height - borderSize, width, borderSize);
-                    rect(0, 0, borderSize, height);
-                    rect(width - borderSize, 0, borderSize, height);
-
-                    let numShapes = int(random(30, 45));
-
-                    for (let i = 0; i < numShapes; i++) {
-                        drawRandomShape();
-                    }
-
-                    applyGrain();
-                }
-
-                function drawRandomShape() {
-                    let randomColor = color(random(colors));
-                    randomColor.setAlpha(random(50, 200));
-                    fill(randomColor);
-
-                    let shapeType = random(['rect', 'circle']);
-
-                    let x = random(-borderSize, width + borderSize);
-                    let y = random(-borderSize, height + borderSize);
-                    let w = random(width * 0.05, width * 0.2);
-                    let h = random(height * 0.05, height * 0.15);
-
-                    if (shapeType === 'rect') {
-                        rect(x, y, w, h);
-                    } else if (shapeType === 'circle') {
-                        circle(x, y, w);
-                    }
-                }
-
-                function applyGrain() {
-                    loadPixels();
-                    for (let i = 0; i < pixels.length; i += 4) {
-                        let grain = random(-30, 30);
-                        pixels[i] = constrain(pixels[i] + grain, 0, 255);
-                        pixels[i + 1] = constrain(pixels[i + 1] + grain, 0, 255);
-                        pixels[i + 2] = constrain(pixels[i + 2] + grain, 0, 255);
-                    }
-                    updatePixels();
-                }
-
-                function mousePressed() {
-                    generateArt();
-                }
-            </script>
+        <!-- Área da Arte -->
+        <div class="artwork" id="artwork">
+            <p>Artwork Placeholder</p>
         </div>
-        <div class="description-section">
+
+        <!-- Área de Descrição e Botão -->
+        <div class="description-container">
             <div class="description">
-                <p>This is the description area. Replace this text with your content.</p>
+                <p>Descrição da obra e informações adicionais.</p>
             </div>
-            <div class="buy-button">
-                <a href="https://example.com" target="_blank">
-                    <button>BUY</button>
-                </a>
-            </div>
+            <button class="buy-button" onclick="window.open('https://linkparacomprar.com', '_blank')">BUY</button>
         </div>
-        <div class="chart">
-            <p>Chart will be inserted here (embed code)</p>
+
+        <!-- Área do Gráfico -->
+        <div class="chart" id="chart">
+            <p>Chart Placeholder</p>
         </div>
     </div>
+
+    <!-- Script para carregar p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="artwork.js"></script> <!-- Substitua pelo código do p5.js quando disponível -->
+    
+    <!-- Script para o gráfico -->
+    <script src="chart.js"></script> <!-- Substitua pelo código do gráfico quando disponível -->
+
 </body>
 </html>
