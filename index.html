@@ -25,13 +25,10 @@
             margin-bottom: 20px;
         }
         .artwork {
-            width: 100%;
-            height: 300px;
-            background-color: #ddd;
+            width: 300px; /* Fixed square size */
+            height: 300px; /* Fixed square size */
             margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative; /* Ensures p5.js canvas is contained */
         }
         .description-section {
             display: flex;
@@ -74,17 +71,87 @@
             align-items: center;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Utopian Gardenia</h1>
         <div class="artwork">
-            <!-- Placeholder for p5.js artwork -->
-            <p>Artwork will be inserted here (p5.js code)</p>
+            <script>
+                let colors = ['#8C162C', '#92A668', '#F28157', '#D93636'];
+                let borderSize;
+
+                function setup() {
+                    let canvasSize = 300; // Fixed square size to match the div
+                    createCanvas(canvasSize, canvasSize); // Square canvas
+                    borderSize = canvasSize * 0.15; // 15% of the canvas size
+                    noStroke();
+                    noLoop();
+                    generateArt();
+                }
+
+                function draw() {
+                    applyGrain();
+                }
+
+                function generateArt() {
+                    background('#401414');
+
+                    // Desenha a borda
+                    fill(0);
+                    rect(0, 0, width, borderSize); // Borda superior
+                    rect(0, height - borderSize, width, borderSize); // Borda inferior
+                    rect(0, 0, borderSize, height); // Borda esquerda
+                    rect(width - borderSize, 0, borderSize, height); // Borda direita
+
+                    // Define um número aleatório de figuras entre 30 e 45
+                    let numShapes = int(random(30, 45));
+
+                    for (let i = 0; i < numShapes; i++) {
+                        drawRandomShape();
+                    }
+
+                    // Certifica-se de que a granulação seja aplicada após as figuras
+                    applyGrain();
+                }
+
+                function drawRandomShape() {
+                    let randomColor = color(random(colors));
+                    randomColor.setAlpha(random(50, 200));
+                    fill(randomColor);
+
+                    let shapeType = random(['rect', 'circle']);
+
+                    let x = random(-borderSize, width + borderSize);
+                    let y = random(-borderSize, height + borderSize);
+                    let w = random(width * 0.05, width * 0.2);
+                    let h = random(height * 0.05, height * 0.15);
+
+                    if (shapeType === 'rect') {
+                        rect(x, y, w, h);
+                    } else if (shapeType === 'circle') {
+                        circle(x, y, w);
+                    }
+                }
+
+                function applyGrain() {
+                    loadPixels();
+                    for (let i = 0; i < pixels.length; i += 4) {
+                        let grain = random(-30, 30);
+                        pixels[i] = constrain(pixels[i] + grain, 0, 255);
+                        pixels[i + 1] = constrain(pixels[i + 1] + grain, 0, 255);
+                        pixels[i + 2] = constrain(pixels[i + 2] + grain, 0, 255);
+                    }
+                    updatePixels();
+                }
+
+                function mousePressed() {
+                    generateArt();
+                }
+            </script>
         </div>
         <div class="description-section">
             <div class="description">
-                <!-- Placeholder for description text -->
                 <p>This is the description area. Replace this text with your content.</p>
             </div>
             <div class="buy-button">
@@ -94,7 +161,6 @@
             </div>
         </div>
         <div class="chart">
-            <!-- Placeholder for chart embed -->
             <p>Chart will be inserted here (embed code)</p>
         </div>
     </div>
