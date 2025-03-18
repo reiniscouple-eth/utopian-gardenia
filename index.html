@@ -25,9 +25,9 @@
             margin-bottom: 20px;
         }
         .artwork {
-            width: 300px; /* Fixed square size */
-            height: 300px; /* Fixed square size */
-            margin-bottom: 20px;
+            width: 600px; /* Increased to 600x600px */
+            height: 600px; /* Increased to 600x600px */
+            margin: 0 auto 20px auto; /* Centered and with bottom margin */
             position: relative; /* Ensures p5.js canvas is contained */
         }
         .description-section {
@@ -82,7 +82,7 @@
                 let borderSize;
 
                 function setup() {
-                    let canvasSize = 300; // Fixed square size to match the div
+                    let canvasSize = 600; // Increased to 600x600px
                     createCanvas(canvasSize, canvasSize); // Square canvas
                     borderSize = canvasSize * 0.15; // 15% of the canvas size
                     noStroke();
