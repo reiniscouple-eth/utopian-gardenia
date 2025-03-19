@@ -18,11 +18,11 @@
             margin: auto;
         }
         h1 {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .artwork {
             width: 100%;
-            height: 610px;
+            height: auto;
             border: 1px solid black;
             display: flex;
             align-items: center;
@@ -30,29 +30,44 @@
             background-color: black;
         }
         .description-container {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid black;
+            text-align: justify;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        .buttons-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            gap: 15px;
             margin-top: 20px;
             padding: 10px;
-            border: 1px solid black;
         }
-        .description {
-            flex: 1;
-            text-align: left;
-            padding-right: 10px;
-        }
-        .buy-button {
-            padding: 10px 20px;
-            background-color: #28A745; /* Verde */
-            color: white;
+        .button {
+            padding: 12px 24px;
+            font-size: 18px;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 8px; /* Cantos levemente arredondados */
+            border-radius: 8px;
+            transition: 0.3s;
+            width: 120px;
+        }
+        .buy-button {
+            background-color: #28A745; /* Verde */
+            color: white;
         }
         .buy-button:hover {
-            background-color: #218838; /* Tom de verde mais escuro no hover */
+            background-color: #218838;
+        }
+        .sell-button {
+            background-color: #DC3545; /* Vermelho */
+            color: white;
+        }
+        .sell-button:hover {
+            background-color: #B22234;
         }
         .chart {
             width: 100%;
@@ -60,6 +75,18 @@
             border: 1px solid black;
             margin-top: 20px;
             background-color: white;
+        }
+        .contract-text {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -77,11 +104,16 @@
                 let borderSize;
 
                 function setup() {
-                    let canvas = createCanvas(600, 400);
+                    let canvas = createCanvas(windowWidth * 0.9, windowHeight * 0.6);
                     canvas.parent('artwork'); // Adiciona o canvas à div artwork
                     borderSize = min(width, height) * 0.15;
                     noStroke();
                     noLoop();
+                    generateArt();
+                }
+
+                function windowResized() {
+                    resizeCanvas(windowWidth * 0.9, windowHeight * 0.6);
                     generateArt();
                 }
 
@@ -142,34 +174,16 @@
             </script>
         </div>
 
-        <!-- Área de Descrição e Botão -->
+        <!-- Área de Descrição -->
         <div class="description-container">
-            <div class="description">
-                <h3>Utopian Gardenia – A Generative Reflection on Transience and Ownership Artistic Vision</h3>
+            <h3>Utopian Gardenia – A Generative Reflection on Transience and Ownership</h3>
+            <p>Utopian Gardenia is a generative digital artwork that encapsulates the ephemeral nature of existence...</p>
+        </div>
 
-<p>Utopian Gardenia is a generative digital artwork that encapsulates the ephemeral nature of existence. Each interaction with the piece reshapes its composition, dynamically rearranging abstract geometric forms in an ever-evolving dance of structure and chaos. The work invites the viewer into an interactive meditation on change, impermanence, and the fluidity of perception. Inspired by the organic unpredictability of nature and the structured elegance of geometry, Utopian Gardenia exists in a perpetual state of reinvention—mirroring the world’s ceaseless transformations.
-
-The visual language of Utopian Gardenia is built upon a rich interplay of color, transparency, and layering, evoking the fleeting harmonies found in utopian landscapes. The textured, almost tactile aesthetic enhances its depth, making each iteration feel tangible despite its digital essence.</p>
-
-<h4>Technical Foundation</h4>
-
-<p>At its core, Utopian Gardenia is a fully on-chain NFT, deployed on the Base blockchain as an ERC-721 token. The artwork is stored immutably via IPFS, ensuring permanence and decentralization. Its generative nature means that no two views of the piece are ever identical, reinforcing its thematic focus on transience and evolution.
-
-To innovate beyond traditional NFT ownership structures, Utopian Gardenia has been fractionalized through the creation of the $UTOPIA token, an ERC-20 asset also deployed on Base. The original NFT is permanently locked within the contract that issues $UTOPIA, meaning that ownership of the artwork is intrinsically tied to the distribution of the token. This structure transforms the experience of collecting digital art, allowing for fluid and liquid participation in its ownership.</p>
-
-<h4>Revolutionizing Art Ownership</h4>
-
-<p>Unlike conventional art markets—where liquidity is constrained and sales often require intermediary negotiations—Utopian Gardenia introduces a groundbreaking financial model. By distributing ownership through $UTOPIA, collectors can seamlessly trade their share of the artwork on decentralized exchanges, unlocking immediate liquidity and redefining the value proposition of digital art investment.
-
-This novel approach aligns with the broader ethos of decentralized finance (DeFi), bridging the gap between art, blockchain, and financial accessibility. Collectors are no longer passive holders but active participants in an ecosystem where art is both a dynamic experience and a fluid asset.</p>
-
-<h4>A Living Digital Artifact</h4>
-
-<p>Utopian Gardenia is not merely an artwork; it is an evolving statement on the nature of ownership, impermanence, and artistic decentralization. It challenges traditional paradigms of art collection by making participation both interactive and financial, fostering a deeper connection between the creator, the collector, and the art itself.</p>
-
-<p>By engaging with Utopian Gardenia, you become part of a movement that reimagines not just what art can be, but how it can be owned, experienced, and valued in a world that is constantly in flux.</p>
-            </div>
-            <button class="buy-button" onclick="window.open('https://www.clanker.world/clanker/0x62066719193718D80f076b2d7f486DeFf6656746', '_blank')">BUY</button>
+        <!-- Botões BUY e SELL -->
+        <div class="buttons-container">
+            <button class="button buy-button" onclick="window.open('https://www.clanker.world/clanker/0x62066719193718D80f076b2d7f486DeFf6656746', '_blank')">BUY</button>
+            <button class="button sell-button" onclick="window.open('https://www.clanker.world/clanker/0x62066719193718D80f076b2d7f486DeFf6656746', '_blank')">SELL</button>
         </div>
 
         <!-- Área do Gráfico -->
@@ -178,6 +192,14 @@ This novel approach aligns with the broader ethos of decentralized finance (DeFi
                 src="https://www.geckoterminal.com/base/pools/0xD0B895DC55D9eBd1eD8CF0Edd2e2460dCcd463fB?embed=1&info=0&swaps=1&grayscale=0&light_chart=0&chart_type=price&resolution=15m" 
                 frameborder="0" allow="clipboard-write" allowfullscreen>
             </iframe>
+        </div>
+
+        <!-- Texto do Contract -->
+        <p class="contract-text">Contract:</p>
+
+        <!-- Footer -->
+        <div class="footer">
+            Powered by Base | Reiniscouple 2025
         </div>
     </div>
 
